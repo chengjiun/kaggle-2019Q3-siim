@@ -46,7 +46,7 @@ MASKS = f"input/masks_{sz}"
 backbone = torchvision.models.resnet101
 model_name = "resnet101"
 checkpoint_path = f"checkpoints/fastai-{model_name}/"
-
+device = [0]
 Path(checkpoint_path).mkdir(exist_ok=True)
 stats = IMAGE_STATS_DICT[sz]
 
@@ -90,6 +90,8 @@ for fold in range(nfolds):
     print("fold: ", fold)
     data = get_data_p(fold)
     learn = unet_learner(data, backbone, metrics=[dice_p])
+    if len(device) > 1:
+        learn.model = torch.nn.DataParallel(learn.model, device_ids=device)
     learn.clip_grad(1.0)
     set_BN_momentum(learn.model)
 
