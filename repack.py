@@ -86,13 +86,13 @@ def generate_mask_file(mask_out, idxs, df):
 
 if __name__ == "__main__":
 
-    sz = 512
+    sz = 256
     sz0 = 1024
     PATH_TRAIN = "input/dicom-images-train/"
     PATH_TEST = "input/dicom-images-test/"
-    train_out = "input/train_512.zip"
-    test_out = "input/test_512.zip"
-    mask_out = "input/masks_512.zip"
+    train_out = "input/train_256.zip"
+    test_out = "input/test_256.zip"
+    mask_out = "input/masks_256.zip"
     train = glob(os.path.join(PATH_TRAIN, "*/*/*.dcm"))
     test = glob(os.path.join(PATH_TEST, "*/*/*.dcm"))
 
